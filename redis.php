@@ -2,9 +2,16 @@
 	$redis = new Redis();
 	$redis->connect('demo.3d0kus.ng.0001.apne1.cache.amazonaws.com');
 	
+	$time_start = microtime(TRUE);
 
-	$redis->set(0, 'value');
-	echo $redis->get(0);
+	for($c=0; $c<10000000; $c++)
+	{
+		$redis->set($c, genRandomString(rand(50,100)));
+	}
+
+	$time_end = microtime(TRUE);
+
+	echo "Time spends: " . $time_end - $time_start . " ms\n";
 
 
 	$redis->close();
